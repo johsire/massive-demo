@@ -7,8 +7,11 @@ app.use(bodyParser.json());
 
 const port = 3000;
 
+app.set('vipi', 'rasjoh');
+
 app.get('/', (req, res) => {
-  res.send('massive-demo');
+  const mySetting = req.app.get('vipi')
+  res.send('massive-demo' + mySetting);
 });
 
 app.get('/incidents', (req, res) => {
