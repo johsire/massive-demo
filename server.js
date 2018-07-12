@@ -24,9 +24,19 @@ app.get('/', (req, res) => {
 
 app.get('/incidents', (req, res) => {
   const db = req.app.get('db');
-  db.getAllIncidents().then(incidents => {
-    res.send(incidents);
-  })
+  const state = req.query.state;
+  // console.log(state);
+
+  if (state) {
+    db.getIncidentsByState({state: state}).then(incidents => {
+      res.send(incidents);
+    })
+  }
+  else {
+    db.getAllIncidents().then(incidents => {
+      res.send(incidents);
+    })
+  }
 });
 
 app.post('/incidents', (req, res) => {
