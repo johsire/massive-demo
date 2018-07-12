@@ -23,7 +23,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/incidents', (req, res) => {
-  res.send([]);
+  const db = req.app.get('db');
+  db.getAllIncidents().then(incidents => {
+    res.send(incidents);
+  })
 });
 
 app.post('/incidents', (req, res) => {
